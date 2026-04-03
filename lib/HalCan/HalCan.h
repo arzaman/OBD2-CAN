@@ -12,7 +12,10 @@ public:
     }
 
     // Initialize CAN TWAI interface
-    bool begin(gpio_num_t tx_pin = CAN_TX_PIN, gpio_num_t rx_pin = CAN_RX_PIN, const twai_timing_config_t& timing = CAN_BAUDRATE);
+    bool begin(gpio_num_t tx_pin = CAN_TX_PIN, gpio_num_t rx_pin = CAN_RX_PIN, 
+               const twai_timing_config_t& timing = CAN_BAUDRATE,
+               twai_mode_t mode = TWAI_MODE_NORMAL,
+               const twai_filter_config_t& filter = TWAI_FILTER_CONFIG_ACCEPT_ALL());
 
     // Stop TWAI interface
     void end();

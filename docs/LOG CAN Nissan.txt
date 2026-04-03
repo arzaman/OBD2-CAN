@@ -1,0 +1,410 @@
+ESP-ROM:esp32s3-20210327
+[INFO][16063] TX OK #52 | ID: 0x7DF | PID: 0x04
+[INFO][16073] Decoded Engine Load: 0 %
+[INFO][16313] TX OK #53 | ID: 0x7DF | PID: 0x0C
+[INFO][16323] RX #53 | ID: 0x7E8 | DLC: 8 | Data: 04 41 0C 00 00 00 00 00 | Ext: 0 | RTR: 0
+[INFO][16323] Decoded RPM: 0
+[INFO][16563] TX OK #54 | ID: 0x7DF | PID: 0x0D
+[INFO][16573] RX #54 | ID: 0x7E8 | DLC: 8 | Data: 03 41 0D 00 00 00 00 00 | Ext: 0 | RTR: 0
+[INFO][16573] Decoded Speed: 0 km/h
+[INFO][16813] TX OK #55 | ID: 0x7DF | PID: 0x05
+[INFO][16833] RX #55 | ID: 0x7E8 | DLC: 8 | Data: 03 41 05 40 00 00 00 00 | Ext: 0 | RTR: 0
+[INFO][16833] Decoded Coolant Temp: 24 C
+[INFO][17063] TX OK #56 | ID: 0x7DF | PID: 0x04
+[INFO][17083] RX #56 | ID: 0x7E8 | DLC: 8 | Data: 03 41 04 00 00 00 00 00 | Ext: 0 | RTR: 0
+[INFO][17083] Decoded Engine Load: 0 %
+ESP-ROM:esp32s3-20210327
+Build:Mar 27 2021
+rst:0x15 (USB_UART_CHIP_RESET),boot:0x2a (SPI_FAST_FLASH_BOOT)
+Saved PC:0x40378d1e
+SPIWP:0xee
+mode:DIO, clock div:1
+load:0x3fce2820,len:0x116c
+load:0x403c8700,len:0xc2c
+load:0x403cb700,len:0x3108
+entry 0x403c88b8
+[INFO][2007] --- OBD2 CAN Scanner ---
+[INFO][2007] === NORMAL OPERATING MODE ===
+[INFO][2007] HW Filter: OBD2 responses only (0x7E8-0x7EF)
+[INFO][2007] Starting System Initialization...
+[INFO][2212] Initializing TWAI driver in NORMAL mode...
+[INFO][2212] TX Pin: GPIO_5, RX Pin: GPIO_6
+[INFO][2212] Driver installed
+[INFO][2212] Driver started
+[INFO][2212] CAN Polling task started.
+[INFO][2212] >>> OPERATING MODE: NORMAL — Full CAN participation <<<
+[INFO][2212] OBD2 Connection State: DISCONNECTED
+[INFO][2212] UI Update task started.
+[INFO][2220] System Initialized Successfully.
+[INFO][3003] TWAI DIAGNOSTICS: State: 1, TX Errors: 0, RX Errors: 0, TX Q: 0, RX Q: 0
+[INFO][3003] STATS: RX=0 TX_OK=0 TX_FAIL=0 BUS_OFF=0
+[INFO][3213] TX OK #1 | ID: 0x7DF | PID: 0x0C
+[INFO][3223] RX #1 | ID: 0x7E8 | DLC: 8 | Data: 04 41 0C 00 00 00 00 00 | Ext: 0 | RTR: 0
+[INFO][3223] Decoded RPM: 0
+[INFO][3223] OBD2 Connection State: CONNECTED
+[INFO][3463] TX OK #2 | ID: 0x7DF | PID: 0x0D
+[INFO][3473] RX #2 | ID: 0x7E8 | DLC: 8 | Data: 03 41 0D 00 00 00 00 00 | Ext: 0 | RTR: 0
+[INFO][3473] Decoded Speed: 0 km/h
+[INFO][3713] TX OK #3 | ID: 0x7DF | PID: 0x05
+[INFO][3723] RX #3 | ID: 0x7E8 | DLC: 8 | Data: 03 41 05 40 00 00 00 00 | Ext: 0 | RTR: 0
+[INFO][3723] Decoded Coolant Temp: 24 C
+[INFO][3963] TX OK #4 | ID: 0x7DF | PID: 0x04
+[INFO][3973] RX #4 | ID: 0x7E8 | DLC: 8 | Data: 03 41 04 00 00 00 00 00 | Ext: 0 | RTR: 0
+[INFO][3973] Decoded Engine Load: 0 %
+[INFO][4213] TX OK #5 | ID: 0x7DF | PID: 0x0C
+[INFO][4223] RX #5 | ID: 0x7E8 | DLC: 8 | Data: 04 41 0C 00 00 00 00 00 | Ext: 0 | RTR: 0
+[INFO][4223] Decoded RPM: 0
+[INFO][4463] TX OK #6 | ID: 0x7DF | PID: 0x0D
+[INFO][4473] RX #6 | ID: 0x7E8 | DLC: 8 | Data: 03 41 0D 00 00 00 00 00 | Ext: 0 | RTR: 0
+[INFO][4473] Decoded Speed: 0 km/h
+[INFO][4713] TX OK #7 | ID: 0x7DF | PID: 0x05
+[INFO][4723] RX #7 | ID: 0x7E8 | DLC: 8 | Data: 03 41 05 40 00 00 00 00 | Ext: 0 | RTR: 0
+[INFO][4723] Decoded Coolant Temp: 24 C
+[INFO][4963] TX OK #8 | ID: 0x7DF | PID: 0x04
+[INFO][4983] RX #8 | ID: 0x7E8 | DLC: 8 | Data: 03 41 04 00 00 00 00 00 | Ext: 0 | RTR: 0
+[INFO][4983] Decoded Engine Load: 0 %
+[INFO][5213] TX OK #9 | ID: 0x7DF | PID: 0x0C
+[INFO][5223] RX #9 | ID: 0x7E8 | DLC: 8 | Data: 04 41 0C 00 00 00 00 00 | Ext: 0 | RTR: 0
+[INFO][5223] Decoded RPM: 0
+[INFO][5463] TX OK #10 | ID: 0x7DF | PID: 0x0D
+[INFO][5473] RX #10 | ID: 0x7E8 | DLC: 8 | Data: 03 41 0D 00 00 00 00 00 | Ext: 0 | RTR: 0
+[INFO][5473] Decoded Speed: 0 km/h
+[INFO][5713] TX OK #11 | ID: 0x7DF | PID: 0x05
+[INFO][5723] RX #11 | ID: 0x7E8 | DLC: 8 | Data: 03 41 05 40 00 00 00 00 | Ext: 0 | RTR: 0
+[INFO][5723] Decoded Coolant Temp: 24 C
+[INFO][5963] TX OK #12 | ID: 0x7DF | PID: 0x04
+[INFO][5973] RX #12 | ID: 0x7E8 | DLC: 8 | Data: 03 41 04 00 00 00 00 00 | Ext: 0 | RTR: 0
+[INFO][5973] Decoded Engine Load: 0 %
+[INFO][6003] TWAI DIAGNOSTICS: State: 1, TX Errors: 0, RX Errors: 0, TX Q: 0, RX Q: 0
+[INFO][6003] STATS: RX=12 TX_OK=12 TX_FAIL=0 BUS_OFF=0
+[INFO][6213] TX OK #13 | ID: 0x7DF | PID: 0x0C
+[INFO][6223] RX #13 | ID: 0x7E8 | DLC: 8 | Data: 04 41 0C 00 00 00 00 00 | Ext: 0 | RTR: 0
+[INFO][6223] Decoded RPM: 0
+[INFO][6463] TX OK #14 | ID: 0x7DF | PID: 0x0D
+[INFO][6473] RX #14 | ID: 0x7E8 | DLC: 8 | Data: 03 41 0D 00 00 00 00 00 | Ext: 0 | RTR: 0
+[INFO][6473] Decoded Speed: 0 km/h
+[INFO][6713] TX OK #15 | ID: 0x7DF | PID: 0x05
+[INFO][6723] RX #15 | ID: 0x7E8 | DLC: 8 | Data: 03 41 05 40 00 00 00 00 | Ext: 0 | RTR: 0
+[INFO][6723] Decoded Coolant Temp: 24 C
+[INFO][6963] TX OK #16 | ID: 0x7DF | PID: 0x04
+[INFO][6973] RX #16 | ID: 0x7E8 | DLC: 8 | Data: 03 41 04 00 00 00 00 00 | Ext: 0 | RTR: 0
+[INFO][6973] Decoded Engine Load: 0 %
+[INFO][7213] TX OK #17 | ID: 0x7DF | PID: 0x0C
+[INFO][7223] RX #17 | ID: 0x7E8 | DLC: 8 | Data: 04 41 0C 00 00 00 00 00 | Ext: 0 | RTR: 0
+[INFO][7223] Decoded RPM: 0
+[INFO][7463] TX OK #18 | ID: 0x7DF | PID: 0x0D
+[INFO][7473] RX #18 | ID: 0x7E8 | DLC: 8 | Data: 03 41 0D 00 00 00 00 00 | Ext: 0 | RTR: 0
+[INFO][7473] Decoded Speed: 0 km/h
+[INFO][7713] TX OK #19 | ID: 0x7DF | PID: 0x05
+[INFO][7723] RX #19 | ID: 0x7E8 | DLC: 8 | Data: 03 41 05 40 00 00 00 00 | Ext: 0 | RTR: 0
+[INFO][7723] Decoded Coolant Temp: 24 C
+[INFO][7963] TX OK #20 | ID: 0x7DF | PID: 0x04
+[INFO][7973] RX #20 | ID: 0x7E8 | DLC: 8 | Data: 03 41 04 00 00 00 00 00 | Ext: 0 | RTR: 0
+[INFO][7973] Decoded Engine Load: 0 %
+[INFO][8213] TX OK #21 | ID: 0x7DF | PID: 0x0C
+[INFO][8223] RX #21 | ID: 0x7E8 | DLC: 8 | Data: 04 41 0C 00 00 00 00 00 | Ext: 0 | RTR: 0
+[INFO][8223] Decoded RPM: 0
+[INFO][8463] TX OK #22 | ID: 0x7DF | PID: 0x0D
+[INFO][8473] RX #22 | ID: 0x7E8 | DLC: 8 | Data: 03 41 0D 00 00 00 00 00 | Ext: 0 | RTR: 0
+[INFO][8473] Decoded Speed: 0 km/h
+[INFO][8713] TX OK #23 | ID: 0x7DF | PID: 0x05
+[INFO][8723] RX #23 | ID: 0x7E8 | DLC: 8 | Data: 03 41 05 40 00 00 00 00 | Ext: 0 | RTR: 0
+[INFO][8723] Decoded Coolant Temp: 24 C
+[INFO][8963] TX OK #24 | ID: 0x7DF | PID: 0x04
+[INFO][8973] RX #24 | ID: 0x7E8 | DLC: 8 | Data: 03 41 04 76 00 00 00 00 | Ext: 0 | RTR: 0
+[INFO][8973] Decoded Engine Load: 46 %
+[INFO][9003] TWAI DIAGNOSTICS: State: 1, TX Errors: 0, RX Errors: 0, TX Q: 0, RX Q: 0
+[INFO][9003] STATS: RX=24 TX_OK=24 TX_FAIL=0 BUS_OFF=0
+[INFO][9213] TX OK #25 | ID: 0x7DF | PID: 0x0C
+[INFO][9233] RX #25 | ID: 0x7E8 | DLC: 8 | Data: 04 41 0C 04 0C 00 00 00 | Ext: 0 | RTR: 0
+[INFO][9233] Decoded RPM: 259
+[INFO][9463] TX OK #26 | ID: 0x7DF | PID: 0x0D
+[INFO][9473] RX #26 | ID: 0x7E8 | DLC: 8 | Data: 03 41 0D 00 00 00 00 00 | Ext: 0 | RTR: 0
+[INFO][9473] Decoded Speed: 0 km/h
+[INFO][9713] TX OK #27 | ID: 0x7DF | PID: 0x05
+[INFO][9723] RX #27 | ID: 0x7E8 | DLC: 8 | Data: 03 41 05 40 00 00 00 00 | Ext: 0 | RTR: 0
+[INFO][9723] Decoded Coolant Temp: 24 C
+[INFO][9963] TX OK #28 | ID: 0x7DF | PID: 0x04
+[INFO][9973] RX #28 | ID: 0x7E8 | DLC: 8 | Data: 03 41 04 45 00 00 00 00 | Ext: 0 | RTR: 0
+[INFO][9973] Decoded Engine Load: 27 %
+[INFO][10213] TX OK #29 | ID: 0x7DF | PID: 0x0C
+[INFO][10223] RX #29 | ID: 0x7E8 | DLC: 8 | Data: 04 41 0C 0C 54 00 00 00 | Ext: 0 | RTR: 0
+[INFO][10223] Decoded RPM: 789
+[INFO][10463] TX OK #30 | ID: 0x7DF | PID: 0x0D
+[INFO][10473] RX #30 | ID: 0x7E8 | DLC: 8 | Data: 03 41 0D 00 00 00 00 00 | Ext: 0 | RTR: 0
+[INFO][10473] Decoded Speed: 0 km/h
+[INFO][10713] TX OK #31 | ID: 0x7DF | PID: 0x05
+[INFO][10723] RX #31 | ID: 0x7E8 | DLC: 8 | Data: 03 41 05 40 00 00 00 00 | Ext: 0 | RTR: 0
+[INFO][10723] Decoded Coolant Temp: 24 C
+[INFO][10963] TX OK #32 | ID: 0x7DF | PID: 0x04
+[INFO][10973] RX #32 | ID: 0x7E8 | DLC: 8 | Data: 03 41 04 42 00 00 00 00 | Ext: 0 | RTR: 0
+[INFO][10973] Decoded Engine Load: 25 %
+[INFO][11213] TX OK #33 | ID: 0x7DF | PID: 0x0C
+[INFO][11223] RX #33 | ID: 0x7E8 | DLC: 8 | Data: 04 41 0C 0C 44 00 00 00 | Ext: 0 | RTR: 0
+[INFO][11223] Decoded RPM: 785
+[INFO][11463] TX OK #34 | ID: 0x7DF | PID: 0x0D
+[INFO][11473] RX #34 | ID: 0x7E8 | DLC: 8 | Data: 03 41 0D 00 00 00 00 00 | Ext: 0 | RTR: 0
+[INFO][11473] Decoded Speed: 0 km/h
+[INFO][11713] TX OK #35 | ID: 0x7DF | PID: 0x05
+[INFO][11723] RX #35 | ID: 0x7E8 | DLC: 8 | Data: 03 41 05 40 00 00 00 00 | Ext: 0 | RTR: 0
+[INFO][11723] Decoded Coolant Temp: 24 C
+[INFO][11963] TX OK #36 | ID: 0x7DF | PID: 0x04
+[INFO][11973] RX #36 | ID: 0x7E8 | DLC: 8 | Data: 03 41 04 3F 00 00 00 00 | Ext: 0 | RTR: 0
+[INFO][11973] Decoded Engine Load: 24 %
+[INFO][12003] TWAI DIAGNOSTICS: State: 1, TX Errors: 0, RX Errors: 0, TX Q: 0, RX Q: 0
+[INFO][12003] STATS: RX=36 TX_OK=36 TX_FAIL=0 BUS_OFF=0
+[INFO][12213] TX OK #37 | ID: 0x7DF | PID: 0x0C
+[INFO][12223] RX #37 | ID: 0x7E8 | DLC: 8 | Data: 04 41 0C 0C 0C 00 00 00 | Ext: 0 | RTR: 0
+[INFO][12223] Decoded RPM: 771
+[INFO][12463] TX OK #38 | ID: 0x7DF | PID: 0x0D
+[INFO][12473] RX #38 | ID: 0x7E8 | DLC: 8 | Data: 03 41 0D 00 00 00 00 00 | Ext: 0 | RTR: 0
+[INFO][12473] Decoded Speed: 0 km/h
+[INFO][12713] TX OK #39 | ID: 0x7DF | PID: 0x05
+[INFO][12723] RX #39 | ID: 0x7E8 | DLC: 8 | Data: 03 41 05 41 00 00 00 00 | Ext: 0 | RTR: 0
+[INFO][12723] Decoded Coolant Temp: 25 C
+[INFO][12963] TX OK #40 | ID: 0x7DF | PID: 0x04
+[INFO][12973] RX #40 | ID: 0x7E8 | DLC: 8 | Data: 03 41 04 3D 00 00 00 00 | Ext: 0 | RTR: 0
+[INFO][12973] Decoded Engine Load: 23 %
+[INFO][13213] TX OK #41 | ID: 0x7DF | PID: 0x0C
+[INFO][13233] RX #41 | ID: 0x7E8 | DLC: 8 | Data: 04 41 0C 0B F4 00 00 00 | Ext: 0 | RTR: 0
+[INFO][13233] Decoded RPM: 765
+[INFO][13463] TX OK #42 | ID: 0x7DF | PID: 0x0D
+[INFO][13473] RX #42 | ID: 0x7E8 | DLC: 8 | Data: 03 41 0D 00 00 00 00 00 | Ext: 0 | RTR: 0
+[INFO][13473] Decoded Speed: 0 km/h
+[INFO][13713] TX OK #43 | ID: 0x7DF | PID: 0x05
+[INFO][13723] RX #43 | ID: 0x7E8 | DLC: 8 | Data: 03 41 05 41 00 00 00 00 | Ext: 0 | RTR: 0
+[INFO][13723] Decoded Coolant Temp: 25 C
+[INFO][13963] TX OK #44 | ID: 0x7DF | PID: 0x04
+[INFO][13973] RX #44 | ID: 0x7E8 | DLC: 8 | Data: 03 41 04 3B 00 00 00 00 | Ext: 0 | RTR: 0
+[INFO][13973] Decoded Engine Load: 23 %
+[INFO][14213] TX OK #45 | ID: 0x7DF | PID: 0x0C
+[INFO][14223] RX #45 | ID: 0x7E8 | DLC: 8 | Data: 04 41 0C 0B E8 00 00 00 | Ext: 0 | RTR: 0
+[INFO][14223] Decoded RPM: 762
+[INFO][14463] TX OK #46 | ID: 0x7DF | PID: 0x0D
+[INFO][14473] RX #46 | ID: 0x7E8 | DLC: 8 | Data: 03 41 0D 00 00 00 00 00 | Ext: 0 | RTR: 0
+[INFO][14473] Decoded Speed: 0 km/h
+[INFO][14713] TX OK #47 | ID: 0x7DF | PID: 0x05
+[INFO][14723] RX #47 | ID: 0x7E8 | DLC: 8 | Data: 03 41 05 42 00 00 00 00 | Ext: 0 | RTR: 0
+[INFO][14723] Decoded Coolant Temp: 26 C
+[INFO][14963] TX OK #48 | ID: 0x7DF | PID: 0x04
+[INFO][14973] RX #48 | ID: 0x7E8 | DLC: 8 | Data: 03 41 04 39 00 00 00 00 | Ext: 0 | RTR: 0
+[INFO][14973] Decoded Engine Load: 22 %
+[INFO][15003] TWAI DIAGNOSTICS: State: 1, TX Errors: 0, RX Errors: 0, TX Q: 0, RX Q: 0
+[INFO][15003] STATS: RX=48 TX_OK=48 TX_FAIL=0 BUS_OFF=0
+[INFO][15213] TX OK #49 | ID: 0x7DF | PID: 0x0C
+[INFO][15223] RX #49 | ID: 0x7E8 | DLC: 8 | Data: 04 41 0C 0B EC 00 00 00 | Ext: 0 | RTR: 0
+[INFO][15223] Decoded RPM: 763
+[INFO][15463] TX OK #50 | ID: 0x7DF | PID: 0x0D
+[INFO][15473] RX #50 | ID: 0x7E8 | DLC: 8 | Data: 03 41 0D 00 00 00 00 00 | Ext: 0 | RTR: 0
+[INFO][15473] Decoded Speed: 0 km/h
+[INFO][15713] TX OK #51 | ID: 0x7DF | PID: 0x05
+[INFO][15723] RX #51 | ID: 0x7E8 | DLC: 8 | Data: 03 41 05 42 00 00 00 00 | Ext: 0 | RTR: 0
+[INFO][15723] Decoded Coolant Temp: 26 C
+[INFO][15963] TX OK #52 | ID: 0x7DF | PID: 0x04
+[INFO][15973] RX #52 | ID: 0x7E8 | DLC: 8 | Data: 03 41 04 3C 00 00 00 00 | Ext: 0 | RTR: 0
+[INFO][15973] Decoded Engine Load: 23 %
+[INFO][16213] TX OK #53 | ID: 0x7DF | PID: 0x0C
+[INFO][16223] RX #53 | ID: 0x7E8 | DLC: 8 | Data: 04 41 0C 11 3C 00 00 00 | Ext: 0 | RTR: 0
+[INFO][16223] Decoded RPM: 1103
+[INFO][16463] TX OK #54 | ID: 0x7DF | PID: 0x0D
+[INFO][16473] RX #54 | ID: 0x7E8 | DLC: 8 | Data: 03 41 0D 00 00 00 00 00 | Ext: 0 | RTR: 0
+[INFO][16473] Decoded Speed: 0 km/h
+[INFO][16713] TX OK #55 | ID: 0x7DF | PID: 0x05
+[INFO][16723] RX #55 | ID: 0x7E8 | DLC: 8 | Data: 03 41 05 42 00 00 00 00 | Ext: 0 | RTR: 0
+[INFO][16723] Decoded Coolant Temp: 26 C
+[INFO][16963] TX OK #56 | ID: 0x7DF | PID: 0x04
+[INFO][16973] RX #56 | ID: 0x7E8 | DLC: 8 | Data: 03 41 04 26 00 00 00 00 | Ext: 0 | RTR: 0
+[INFO][16973] Decoded Engine Load: 14 %
+[INFO][17213] TX OK #57 | ID: 0x7DF | PID: 0x0C
+[INFO][17223] RX #57 | ID: 0x7E8 | DLC: 8 | Data: 04 41 0C 12 5C 00 00 00 | Ext: 0 | RTR: 0
+[INFO][17223] Decoded RPM: 1175
+[INFO][17463] TX OK #58 | ID: 0x7DF | PID: 0x0D
+[INFO][17473] RX #58 | ID: 0x7E8 | DLC: 8 | Data: 03 41 0D 00 00 00 00 00 | Ext: 0 | RTR: 0
+[INFO][17473] Decoded Speed: 0 km/h
+[INFO][17713] TX OK #59 | ID: 0x7DF | PID: 0x05
+[INFO][17723] RX #59 | ID: 0x7E8 | DLC: 8 | Data: 03 41 05 42 00 00 00 00 | Ext: 0 | RTR: 0
+[INFO][17723] Decoded Coolant Temp: 26 C
+[INFO][17963] TX OK #60 | ID: 0x7DF | PID: 0x04
+[INFO][17973] RX #60 | ID: 0x7E8 | DLC: 8 | Data: 03 41 04 2E 00 00 00 00 | Ext: 0 | RTR: 0
+[INFO][17973] Decoded Engine Load: 18 %
+[INFO][18003] TWAI DIAGNOSTICS: State: 1, TX Errors: 0, RX Errors: 0, TX Q: 0, RX Q: 0
+[INFO][18003] STATS: RX=60 TX_OK=60 TX_FAIL=0 BUS_OFF=0
+[INFO][18213] TX OK #61 | ID: 0x7DF | PID: 0x0C
+[INFO][18223] RX #61 | ID: 0x7E8 | DLC: 8 | Data: 04 41 0C 16 B0 00 00 00 | Ext: 0 | RTR: 0
+[INFO][18223] Decoded RPM: 1452
+[INFO][18463] TX OK #62 | ID: 0x7DF | PID: 0x0D
+[INFO][18473] RX #62 | ID: 0x7E8 | DLC: 8 | Data: 03 41 0D 00 00 00 00 00 | Ext: 0 | RTR: 0
+[INFO][18473] Decoded Speed: 0 km/h
+[INFO][18713] TX OK #63 | ID: 0x7DF | PID: 0x05
+[INFO][18723] RX #63 | ID: 0x7E8 | DLC: 8 | Data: 03 41 05 42 00 00 00 00 | Ext: 0 | RTR: 0
+[INFO][18723] Decoded Coolant Temp: 26 C
+[INFO][18963] TX OK #64 | ID: 0x7DF | PID: 0x04
+[INFO][18973] RX #64 | ID: 0x7E8 | DLC: 8 | Data: 03 41 04 45 00 00 00 00 | Ext: 0 | RTR: 0
+[INFO][18973] Decoded Engine Load: 27 %
+[INFO][19213] TX OK #65 | ID: 0x7DF | PID: 0x0C
+[INFO][19223] RX #65 | ID: 0x7E8 | DLC: 8 | Data: 04 41 0C 1A 08 00 00 00 | Ext: 0 | RTR: 0
+[INFO][19223] Decoded RPM: 1666
+[INFO][19463] TX OK #66 | ID: 0x7DF | PID: 0x0D
+[INFO][19473] RX #66 | ID: 0x7E8 | DLC: 8 | Data: 03 41 0D 00 00 00 00 00 | Ext: 0 | RTR: 0
+[INFO][19473] Decoded Speed: 0 km/h
+[INFO][19713] TX OK #67 | ID: 0x7DF | PID: 0x05
+[INFO][19723] RX #67 | ID: 0x7E8 | DLC: 8 | Data: 03 41 05 42 00 00 00 00 | Ext: 0 | RTR: 0
+[INFO][19723] Decoded Coolant Temp: 26 C
+[INFO][19963] TX OK #68 | ID: 0x7DF | PID: 0x04
+[INFO][19973] RX #68 | ID: 0x7E8 | DLC: 8 | Data: 03 41 04 3D 00 00 00 00 | Ext: 0 | RTR: 0
+[INFO][19973] Decoded Engine Load: 23 %
+[INFO][20213] TX OK #69 | ID: 0x7DF | PID: 0x0C
+[INFO][20223] RX #69 | ID: 0x7E8 | DLC: 8 | Data: 04 41 0C 10 04 00 00 00 | Ext: 0 | RTR: 0
+[INFO][20223] Decoded RPM: 1025
+[INFO][20463] TX OK #70 | ID: 0x7DF | PID: 0x0D
+[INFO][20473] RX #70 | ID: 0x7E8 | DLC: 8 | Data: 03 41 0D 00 00 00 00 00 | Ext: 0 | RTR: 0
+[INFO][20473] Decoded Speed: 0 km/h
+[INFO][20713] TX OK #71 | ID: 0x7DF | PID: 0x05
+[INFO][20723] RX #71 | ID: 0x7E8 | DLC: 8 | Data: 03 41 05 42 00 00 00 00 | Ext: 0 | RTR: 0
+[INFO][20723] Decoded Coolant Temp: 26 C
+[INFO][20963] TX OK #72 | ID: 0x7DF | PID: 0x04
+[INFO][20973] RX #72 | ID: 0x7E8 | DLC: 8 | Data: 03 41 04 3D 00 00 00 00 | Ext: 0 | RTR: 0
+[INFO][20973] Decoded Engine Load: 23 %
+[INFO][21003] TWAI DIAGNOSTICS: State: 1, TX Errors: 0, RX Errors: 0, TX Q: 0, RX Q: 0
+[INFO][21003] STATS: RX=72 TX_OK=72 TX_FAIL=0 BUS_OFF=0
+[INFO][21213] TX OK #73 | ID: 0x7DF | PID: 0x0C
+[INFO][21223] RX #73 | ID: 0x7E8 | DLC: 8 | Data: 04 41 0C 13 A4 00 00 00 | Ext: 0 | RTR: 0
+[INFO][21223] Decoded RPM: 1257
+[INFO][21463] TX OK #74 | ID: 0x7DF | PID: 0x0D
+[INFO][21473] RX #74 | ID: 0x7E8 | DLC: 8 | Data: 03 41 0D 00 00 00 00 00 | Ext: 0 | RTR: 0
+[INFO][21473] Decoded Speed: 0 km/h
+[INFO][21713] TX OK #75 | ID: 0x7DF | PID: 0x05
+[INFO][21723] RX #75 | ID: 0x7E8 | DLC: 8 | Data: 03 41 05 42 00 00 00 00 | Ext: 0 | RTR: 0
+[INFO][21723] Decoded Coolant Temp: 26 C
+[INFO][21963] TX OK #76 | ID: 0x7DF | PID: 0x04
+[INFO][21973] RX #76 | ID: 0x7E8 | DLC: 8 | Data: 03 41 04 47 00 00 00 00 | Ext: 0 | RTR: 0
+[INFO][21973] Decoded Engine Load: 27 %
+[INFO][22213] TX OK #77 | ID: 0x7DF | PID: 0x0C
+[INFO][22223] RX #77 | ID: 0x7E8 | DLC: 8 | Data: 04 41 0C 1B 98 00 00 00 | Ext: 0 | RTR: 0
+[INFO][22223] Decoded RPM: 1766
+[INFO][22463] TX OK #78 | ID: 0x7DF | PID: 0x0D
+[INFO][22473] RX #78 | ID: 0x7E8 | DLC: 8 | Data: 03 41 0D 00 00 00 00 00 | Ext: 0 | RTR: 0
+[INFO][22473] Decoded Speed: 0 km/h
+[INFO][22713] TX OK #79 | ID: 0x7DF | PID: 0x05
+[INFO][22723] RX #79 | ID: 0x7E8 | DLC: 8 | Data: 03 41 05 42 00 00 00 00 | Ext: 0 | RTR: 0
+[INFO][22723] Decoded Coolant Temp: 26 C
+[INFO][22963] TX OK #80 | ID: 0x7DF | PID: 0x04
+[INFO][22973] RX #80 | ID: 0x7E8 | DLC: 8 | Data: 03 41 04 38 00 00 00 00 | Ext: 0 | RTR: 0
+[INFO][22973] Decoded Engine Load: 21 %
+[INFO][23213] TX OK #81 | ID: 0x7DF | PID: 0x0C
+[INFO][23223] RX #81 | ID: 0x7E8 | DLC: 8 | Data: 04 41 0C 2A 3C 00 00 00 | Ext: 0 | RTR: 0
+[INFO][23223] Decoded RPM: 2703
+[INFO][23463] TX OK #82 | ID: 0x7DF | PID: 0x0D
+[INFO][23473] RX #82 | ID: 0x7E8 | DLC: 8 | Data: 03 41 0D 00 00 00 00 00 | Ext: 0 | RTR: 0
+[INFO][23473] Decoded Speed: 0 km/h
+[INFO][23713] TX OK #83 | ID: 0x7DF | PID: 0x05
+[INFO][23723] RX #83 | ID: 0x7E8 | DLC: 8 | Data: 03 41 05 42 00 00 00 00 | Ext: 0 | RTR: 0
+[INFO][23723] Decoded Coolant Temp: 26 C
+[INFO][23963] TX OK #84 | ID: 0x7DF | PID: 0x04
+[INFO][23973] RX #84 | ID: 0x7E8 | DLC: 8 | Data: 03 41 04 21 00 00 00 00 | Ext: 0 | RTR: 0
+[INFO][23973] Decoded Engine Load: 12 %
+[INFO][24003] TWAI DIAGNOSTICS: State: 1, TX Errors: 0, RX Errors: 0, TX Q: 0, RX Q: 0
+[INFO][24003] STATS: RX=84 TX_OK=84 TX_FAIL=0 BUS_OFF=0
+[INFO][24213] TX OK #85 | ID: 0x7DF | PID: 0x0C
+[INFO][24223] RX #85 | ID: 0x7E8 | DLC: 8 | Data: 04 41 0C 13 20 00 00 00 | Ext: 0 | RTR: 0
+[INFO][24223] Decoded RPM: 1224
+[INFO][24463] TX OK #86 | ID: 0x7DF | PID: 0x0D
+[INFO][24473] RX #86 | ID: 0x7E8 | DLC: 8 | Data: 03 41 0D 00 00 00 00 00 | Ext: 0 | RTR: 0
+[INFO][24473] Decoded Speed: 0 km/h
+[INFO][24713] TX OK #87 | ID: 0x7DF | PID: 0x05
+[INFO][24723] RX #87 | ID: 0x7E8 | DLC: 8 | Data: 03 41 05 42 00 00 00 00 | Ext: 0 | RTR: 0
+[INFO][24723] Decoded Coolant Temp: 26 C
+[INFO][24963] TX OK #88 | ID: 0x7DF | PID: 0x04
+[INFO][24973] RX #88 | ID: 0x7E8 | DLC: 8 | Data: 03 41 04 32 00 00 00 00 | Ext: 0 | RTR: 0
+[INFO][24973] Decoded Engine Load: 19 %
+[INFO][25213] TX OK #89 | ID: 0x7DF | PID: 0x0C
+[INFO][25223] RX #89 | ID: 0x7E8 | DLC: 8 | Data: 04 41 0C 0B C4 00 00 00 | Ext: 0 | RTR: 0
+[INFO][25223] Decoded RPM: 753
+[INFO][25463] TX OK #90 | ID: 0x7DF | PID: 0x0D
+[INFO][25483] RX #90 | ID: 0x7E8 | DLC: 8 | Data: 03 41 0D 00 00 00 00 00 | Ext: 0 | RTR: 0
+[INFO][25483] Decoded Speed: 0 km/h
+[INFO][25713] TX OK #91 | ID: 0x7DF | PID: 0x05
+[INFO][25733] RX #91 | ID: 0x7E8 | DLC: 8 | Data: 03 41 05 42 00 00 00 00 | Ext: 0 | RTR: 0
+[INFO][25733] Decoded Coolant Temp: 26 C
+[INFO][25963] TX OK #92 | ID: 0x7DF | PID: 0x04
+[INFO][25973] RX #92 | ID: 0x7E8 | DLC: 8 | Data: 03 41 04 34 00 00 00 00 | Ext: 0 | RTR: 0
+[INFO][25973] Decoded Engine Load: 20 %
+[INFO][26213] TX OK #93 | ID: 0x7DF | PID: 0x0C
+[INFO][26223] RX #93 | ID: 0x7E8 | DLC: 8 | Data: 04 41 0C 0B C4 00 00 00 | Ext: 0 | RTR: 0
+[INFO][26223] Decoded RPM: 753
+[INFO][26463] TX OK #94 | ID: 0x7DF | PID: 0x0D
+[INFO][26473] RX #94 | ID: 0x7E8 | DLC: 8 | Data: 03 41 0D 00 00 00 00 00 | Ext: 0 | RTR: 0
+[INFO][26473] Decoded Speed: 0 km/h
+[INFO][26713] TX OK #95 | ID: 0x7DF | PID: 0x05
+[INFO][26723] RX #95 | ID: 0x7E8 | DLC: 8 | Data: 03 41 05 42 00 00 00 00 | Ext: 0 | RTR: 0
+[INFO][26723] Decoded Coolant Temp: 26 C
+[INFO][26963] TX OK #96 | ID: 0x7DF | PID: 0x04
+[INFO][26973] RX #96 | ID: 0x7E8 | DLC: 8 | Data: 03 41 04 6F 00 00 00 00 | Ext: 0 | RTR: 0
+[INFO][26973] Decoded Engine Load: 43 %
+[INFO][27003] TWAI DIAGNOSTICS: State: 1, TX Errors: 0, RX Errors: 0, TX Q: 0, RX Q: 0
+[INFO][27003] STATS: RX=96 TX_OK=96 TX_FAIL=0 BUS_OFF=0
+[INFO][27213] TX OK #97 | ID: 0x7DF | PID: 0x0C
+[INFO][27223] RX #97 | ID: 0x7E8 | DLC: 8 | Data: 04 41 0C 21 00 00 00 00 | Ext: 0 | RTR: 0
+[INFO][27223] Decoded RPM: 2112
+[INFO][27463] TX OK #98 | ID: 0x7DF | PID: 0x0D
+[INFO][27473] RX #98 | ID: 0x7E8 | DLC: 8 | Data: 03 41 0D 00 00 00 00 00 | Ext: 0 | RTR: 0
+[INFO][27473] Decoded Speed: 0 km/h
+[INFO][27713] TX OK #99 | ID: 0x7DF | PID: 0x05
+[INFO][27723] RX #99 | ID: 0x7E8 | DLC: 8 | Data: 03 41 05 42 00 00 00 00 | Ext: 0 | RTR: 0
+[INFO][27723] Decoded Coolant Temp: 26 C
+[INFO][27963] TX OK #100 | ID: 0x7DF | PID: 0x04
+[INFO][27973] RX #100 | ID: 0x7E8 | DLC: 8 | Data: 03 41 04 20 00 00 00 00 | Ext: 0 | RTR: 0
+[INFO][27973] Decoded Engine Load: 12 %
+[INFO][28213] TX OK #101 | ID: 0x7DF | PID: 0x0C
+[INFO][28223] RX #101 | ID: 0x7E8 | DLC: 8 | Data: 04 41 0C 27 4C 00 00 00 | Ext: 0 | RTR: 0
+[INFO][28223] Decoded RPM: 2515
+[INFO][28463] TX OK #102 | ID: 0x7DF | PID: 0x0D
+[INFO][28473] RX #102 | ID: 0x7E8 | DLC: 8 | Data: 03 41 0D 00 00 00 00 00 | Ext: 0 | RTR: 0
+[INFO][28473] Decoded Speed: 0 km/h
+[INFO][28713] TX OK #103 | ID: 0x7DF | PID: 0x05
+[INFO][28723] RX #103 | ID: 0x7E8 | DLC: 8 | Data: 03 41 05 43 00 00 00 00 | Ext: 0 | RTR: 0
+[INFO][28723] Decoded Coolant Temp: 27 C
+[INFO][28963] TX OK #104 | ID: 0x7DF | PID: 0x04
+[INFO][28973] RX #104 | ID: 0x7E8 | DLC: 8 | Data: 03 41 04 22 00 00 00 00 | Ext: 0 | RTR: 0
+[INFO][28973] Decoded Engine Load: 13 %
+[INFO][29213] TX OK #105 | ID: 0x7DF | PID: 0x0C
+[INFO][29223] RX #105 | ID: 0x7E8 | DLC: 8 | Data: 04 41 0C 10 D0 00 00 00 | Ext: 0 | RTR: 0
+[INFO][29223] Decoded RPM: 1076
+[INFO][29463] TX OK #106 | ID: 0x7DF | PID: 0x0D
+[INFO][29483] RX #106 | ID: 0x7E8 | DLC: 8 | Data: 03 41 0D 00 00 00 00 00 | Ext: 0 | RTR: 0
+[INFO][29483] Decoded Speed: 0 km/h
+[INFO][29713] TX OK #107 | ID: 0x7DF | PID: 0x05
+[INFO][29733] RX #107 | ID: 0x7E8 | DLC: 8 | Data: 03 41 05 43 00 00 00 00 | Ext: 0 | RTR: 0
+[INFO][29733] Decoded Coolant Temp: 27 C
+[INFO][29963] TX OK #108 | ID: 0x7DF | PID: 0x04
+[INFO][29973] RX #108 | ID: 0x7E8 | DLC: 8 | Data: 03 41 04 33 00 00 00 00 | Ext: 0 | RTR: 0
+[INFO][29973] Decoded Engine Load: 20 %
+[INFO][30003] TWAI DIAGNOSTICS: State: 1, TX Errors: 0, RX Errors: 0, TX Q: 0, RX Q: 0
+[INFO][30003] STATS: RX=108 TX_OK=108 TX_FAIL=0 BUS_OFF=0
+[INFO][30213] TX OK #109 | ID: 0x7DF | PID: 0x0C
+[INFO][30223] RX #109 | ID: 0x7E8 | DLC: 8 | Data: 04 41 0C 0B C0 00 00 00 | Ext: 0 | RTR: 0
+[INFO][30223] Decoded RPM: 752
+[INFO][30463] TX OK #110 | ID: 0x7DF | PID: 0x0D
+[INFO][30473] RX #110 | ID: 0x7E8 | DLC: 8 | Data: 03 41 0D 00 00 00 00 00 | Ext: 0 | RTR: 0
+[INFO][30473] Decoded Speed: 0 km/h
+[INFO][30713] TX OK #111 | ID: 0x7DF | PID: 0x05
+[INFO][30723] RX #111 | ID: 0x7E8 | DLC: 8 | Data: 03 41 05 43 00 00 00 00 | Ext: 0 | RTR: 0
+[INFO][30723] Decoded Coolant Temp: 27 C
+[INFO][30963] TX OK #112 | ID: 0x7DF | PID: 0x04
+[INFO][30973] RX #112 | ID: 0x7E8 | DLC: 8 | Data: 03 41 04 33 00 00 00 00 | Ext: 0 | RTR: 0
+[INFO][30973] Decoded Engine Load: 20 %
+[INFO][31213] TX OK #113 | ID: 0x7DF | PID: 0x0C
+[INFO][31223] RX #113 | ID: 0x7E8 | DLC: 8 | Data: 04 41 0C 0B B4 00 00 00 | Ext: 0 | RTR: 0
+[INFO][31223] Decoded RPM: 749
+[INFO][31463] TX OK #114 | ID: 0x7DF | PID: 0x0D
+[INFO][31473] RX #114 | ID: 0x7E8 | DLC: 8 | Data: 03 41 0D 00 00 00 00 00 | Ext: 0 | RTR: 0
+[INFO][31473] Decoded Speed: 0 km/h
+[INFO][31713] TX OK #115 | ID: 0x7DF | PID: 0x05
+[INFO][31723] RX #115 | ID: 0x7E8 | DLC: 8 | Data: 03 41 05 43 00 00 00 00 | Ext: 0 | RTR: 0
+[INFO][31723] Decoded Coolant Temp: 27 C
+[INFO][31963] TX OK #116 | ID: 0x7DF | PID: 0x04
+[INFO][31973] RX #116 | ID: 0x7E8 | DLC: 8 | Data: 03 41 04 33 00 00 00 00 | Ext: 0 | RTR: 0
+[INFO][31973] Decoded Engine Load: 20 %
+[INFO][32213] TX OK #117 | ID: 0x7DF | PID: 0x0C
+[INFO][32223] RX #117 | ID: 0x7E8 | DLC: 8 | Data: 04 41 0C 0B B8 00 00 00 | Ext: 0 | RTR: 0
+[INFO][32223] Decoded RPM: 750

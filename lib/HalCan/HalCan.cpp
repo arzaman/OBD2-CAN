@@ -1,21 +1,26 @@
 #include "HalCan.h"
 
-bool HalCan::begin(gpio_num_t tx_pin, gpio_num_t rx_pin, const twai_timing_config_t& timing) {
+bool HalCan::begin(gpio_num_t tx_pin, gpio_num_t rx_pin, const twai_timing_config_t& timing, 
+                   twai_mode_t mode, const twai_filter_config_t& filter) {
     if (_initialized) {
         LOG_WARN("CAN Interface already initialized.");
         return true;
     }
 
-    LOG_INFO("Initializing TWAI driver...");
+    const char* mode_str = (mode == TWAI_MODE_LISTEN_ONLY) ? "LISTEN_ONLY" :
+                           (mode == TWAI_MODE_NO_ACK)      ? "NO_ACK (self-test)" :
+                                                             "NORMAL";
+    LOG_INFO("Initializing TWAI driver in %s mode...", mode_str);
+    LOG_INFO("TX Pin: GPIO_%d, RX Pin: GPIO_%d", tx_pin, rx_pin);
     
-    // General Config: Set TX, RX, operating mode (Normal)
-    twai_general_config_t g_config = TWAI_GENERAL_CONFIG_DEFAULT(tx_pin, rx_pin, TWAI_MODE_NORMAL);
+    // General Config: Set TX, RX, operating mode
+    twai_general_config_t g_config = TWAI_GENERAL_CONFIG_DEFAULT(tx_pin, rx_pin, mode);
     
     // Timing Config: Provided as parameter (default 500k)
     twai_timing_config_t t_config = timing;
     
-    // Filter Config: Accept all frames
-    twai_filter_config_t f_config = TWAI_FILTER_CONFIG_ACCEPT_ALL();
+    // Filter Config: Use provided filter (ACCEPT_ALL or specific)
+    twai_filter_config_t f_config = filter;
 
     // Install driver
     if (twai_driver_install(&g_config, &t_config, &f_config) == ESP_OK) {

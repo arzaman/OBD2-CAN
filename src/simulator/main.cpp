@@ -51,10 +51,11 @@ void EcuSimulatorTask(void* pvParameters) {
             if (sim_temp < 90.0f) sim_temp = 90.0f;
         }
 
-        // --- Hardware Auto-Recovery (optional but good) ---
-        if (HalCan::getInstance().getState() == TWAI_STATE_BUS_OFF) {
+        // --- Hardware Auto-Recovery ---
+        twai_state_t sim_state = HalCan::getInstance().getState();
+        if (sim_state != TWAI_STATE_RUNNING) {
             HalCan::getInstance().recover();
-            vTaskDelay(pdMS_TO_TICKS(100));
+            vTaskDelay(pdMS_TO_TICKS(sim_state == TWAI_STATE_BUS_OFF ? 500 : 50));
             continue;
         }
 

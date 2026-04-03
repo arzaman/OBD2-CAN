@@ -34,6 +34,22 @@
 #define SIM_CAN_RX_PIN GPIO_NUM_1 // white
 
 // -----------------------------------------------------------------------------
+// DIAGNOSTIC MODE FLAGS (set to 1 to enable, 0 to disable)
+// -----------------------------------------------------------------------------
+// Step 1: LISTEN_ONLY - Passive sniffing, NO transmission, NO ACK.
+//         Use this to verify the transceiver can receive CAN traffic from the car.
+//         If you see frames → hardware is OK. If not → HW/cable problem.
+#define DIAG_LISTEN_ONLY  0
+
+// Step 2: NO_ACK mode - Transmit frames without requiring ACK from other nodes.
+//         Use this if Step 1 passes but NORMAL mode still fails (ACK errors).
+//         Only used when DIAG_LISTEN_ONLY is 0.
+#define DIAG_NO_ACK       0
+
+// Verbose diagnostics: log every RX frame raw data + detailed TX error codes
+#define DIAG_VERBOSE      1
+
+// -----------------------------------------------------------------------------
 // CAN BUS CONFIGURATION
 // -----------------------------------------------------------------------------
 // OBD-II typical baud rates: 500Kbps (most common) or 250Kbps.

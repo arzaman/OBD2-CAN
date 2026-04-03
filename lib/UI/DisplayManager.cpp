@@ -128,37 +128,63 @@ void DisplayManager::drawSpeed(int speed, bool forceFullClear) {
 }
 
 void DisplayManager::drawGrid(const ObdData& data, bool forceFullClear) {
+    int w = M5.Display.width();
+    int h = M5.Display.height();
+    int qW = w / 2;
+    int qH = h / 2;
+
     if (forceFullClear) {
         M5.Display.fillScreen(TFT_BLACK);
         // Draw crosshair separators
-        M5.Display.drawLine(M5.Display.width()/2, 10, M5.Display.width()/2, M5.Display.height() - 10, TFT_DARKGREY);
-        M5.Display.drawLine(10, M5.Display.height()/2, M5.Display.width() - 10, M5.Display.height()/2, TFT_DARKGREY);
+        M5.Display.drawLine(qW, 6, qW, h - 6, TFT_DARKGREY);
+        M5.Display.drawLine(6, qH, w - 6, qH, TFT_DARKGREY);
     }
     
-    M5.Display.setTextFont(2);
-    M5.Display.setTextSize(1);
     char buf[16];
 
-    int qWidth = M5.Display.width() / 2;
-    int qHeight = M5.Display.height() / 2;
-
-    // Top-Left: RPM (Green)
+    // --- Top-Left: RPM (Green) ---
+    // Label
+    M5.Display.setTextFont(1);
+    M5.Display.setTextSize(1);
+    M5.Display.setTextColor(M5.Display.color565(0,180,0), TFT_BLACK);
+    M5.Display.drawString("RPM", qW/2, qH/2 - 14);
+    // Value (larger font, fixed 4 digits)
+    M5.Display.setTextFont(2);
+    M5.Display.setTextSize(2);
     M5.Display.setTextColor(M5.Display.color565(0,255,0), TFT_BLACK);
-    snprintf(buf, sizeof(buf), "%dR", data.rpm);
-    M5.Display.drawString(buf, qWidth/2, qHeight/2);
+    snprintf(buf, sizeof(buf), "%4d", data.rpm);
+    M5.Display.drawString(buf, qW/2, qH/2 + 8);
 
-    // Top-Right: Speed (Cyan)
+    // --- Top-Right: Speed (Cyan) ---
+    M5.Display.setTextFont(1);
+    M5.Display.setTextSize(1);
+    M5.Display.setTextColor(M5.Display.color565(0,180,180), TFT_BLACK);
+    M5.Display.drawString("km/h", qW + qW/2, qH/2 - 14);
+    M5.Display.setTextFont(2);
+    M5.Display.setTextSize(2);
     M5.Display.setTextColor(M5.Display.color565(0,255,255), TFT_BLACK);
-    snprintf(buf, sizeof(buf), "%dkm", data.speed);
-    M5.Display.drawString(buf, qWidth + qWidth/2, qHeight/2);
+    snprintf(buf, sizeof(buf), "%3d", data.speed);
+    M5.Display.drawString(buf, qW + qW/2, qH/2 + 8);
 
-    // Bottom-Left: Temp (Red)
-    M5.Display.setTextColor(M5.Display.color565(255,0,0), TFT_BLACK);
-    snprintf(buf, sizeof(buf), "%dC", data.coolantTemp);
-    M5.Display.drawString(buf, qWidth/2, qHeight + qHeight/2);
+    // --- Bottom-Left: Temp (Orange-Red) ---
+    M5.Display.setTextFont(1);
+    M5.Display.setTextSize(1);
+    M5.Display.setTextColor(M5.Display.color565(180,80,0), TFT_BLACK);
+    M5.Display.drawString("TEMP C", qW/2, qH + qH/2 - 14);
+    M5.Display.setTextFont(2);
+    M5.Display.setTextSize(2);
+    M5.Display.setTextColor(M5.Display.color565(255,120,0), TFT_BLACK);
+    snprintf(buf, sizeof(buf), "%2d", data.coolantTemp);
+    M5.Display.drawString(buf, qW/2, qH + qH/2 + 8);
 
-    // Bottom-Right: Load (Yellow)
+    // --- Bottom-Right: Load (Yellow) ---
+    M5.Display.setTextFont(1);
+    M5.Display.setTextSize(1);
+    M5.Display.setTextColor(M5.Display.color565(180,180,0), TFT_BLACK);
+    M5.Display.drawString("LOAD %", qW + qW/2, qH + qH/2 - 14);
+    M5.Display.setTextFont(2);
+    M5.Display.setTextSize(2);
     M5.Display.setTextColor(M5.Display.color565(255,255,0), TFT_BLACK);
-    snprintf(buf, sizeof(buf), "%d%%", data.engineLoad);
-    M5.Display.drawString(buf, qWidth + qWidth/2, qHeight + qHeight/2);
+    snprintf(buf, sizeof(buf), "%2d", data.engineLoad);
+    M5.Display.drawString(buf, qW + qW/2, qH + qH/2 + 8);
 }
