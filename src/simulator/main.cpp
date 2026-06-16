@@ -6,6 +6,13 @@
 #include "../../lib/Obd2/Obd2Decoder.h" // Just to reuse PID constants
 
 // -----------------------------------------------------------------------------
+// ECU SIMULATOR CONFIGURATION
+// -----------------------------------------------------------------------------
+// Set to 1 to emulate the Mercedes Sprinter (29-bit ID). 
+// Set to 0 to emulate a standard car (11-bit ID).
+#define EMULATE_29_BIT 1
+
+// -----------------------------------------------------------------------------
 // ECU SIMULATOR TASK
 // -----------------------------------------------------------------------------
 void EcuSimulatorTask(void* pvParameters) {
@@ -16,6 +23,10 @@ void EcuSimulatorTask(void* pvParameters) {
     static float sim_temp = 90.0f;
     static float sim_load = 20.0f;
     uint32_t last_physics_update = millis();
+
+    uint32_t expected_req_id = EMULATE_29_BIT ? CAN_ID_OBD_REQUEST_EXT : CAN_ID_OBD_REQUEST_STD;
+    uint32_t reply_id = EMULATE_29_BIT ? (CAN_ID_OBD_REPLY_EXT_VAL | 0x10) : CAN_ID_OBD_REPLY_STD_MIN;
+    uint8_t reply_extd = EMULATE_29_BIT ? 1 : 0;
 
     while (1) {
         // --- 1. Physics Engine ---
@@ -62,10 +73,10 @@ void EcuSimulatorTask(void* pvParameters) {
         twai_message_t rx_msg;
         // Block until a frame is received
         if (HalCan::getInstance().readFrame(rx_msg, 50)) {
-            LOG_INFO(">>> DEBUG: RAW FRAME RECEIVED. ID: 0x%03X, DLC: %d", rx_msg.identifier, rx_msg.data_length_code);
+            LOG_INFO(">>> DEBUG: RAW FRAME RECEIVED. ID: 0x%03X, DLC: %d, EXTD: %d", rx_msg.identifier, rx_msg.data_length_code, rx_msg.extd);
             
-            // Check if it's an OBD2 Broadcast Request (Scanner asking ECU)
-            if (rx_msg.identifier == CAN_ID_OBD_REQUEST && rx_msg.data_length_code >= 3) {
+            // Check if it's the expected OBD2 Broadcast Request
+            if (rx_msg.identifier == expected_req_id && rx_msg.extd == reply_extd && rx_msg.data_length_code >= 3) {
                 
                 uint8_t mode = rx_msg.data[1];
                 if (mode == OBD_MODE_CURRENT_DATA) {
@@ -73,8 +84,8 @@ void EcuSimulatorTask(void* pvParameters) {
                     
                     // Prepare response frame
                     twai_message_t tx_msg = {0};
-                    tx_msg.identifier = CAN_ID_OBD_REPLY_MIN; // 0x7E8 (Standard Engine ECU reply ID)
-                    tx_msg.extd = 0;              // Standard 11-bit
+                    tx_msg.identifier = reply_id; 
+                    tx_msg.extd = reply_extd;
                     tx_msg.rtr = 0;               // Data frame
                     tx_msg.data_length_code = 8;
                     
