@@ -202,14 +202,11 @@ void setup() {
     };
 #else
     LOG_INFO("=== NORMAL OPERATING MODE ===");
-    LOG_INFO("HW Filter: OBD2 responses only (0x7E8-0x7EF)");
+    LOG_INFO("HW Filter: ACCEPT_ALL (software filtering for OBD2)");
     twai_mode_t can_mode = TWAI_MODE_NORMAL;
-    // Same OBD2 response filter as NO_ACK mode
-    twai_filter_config_t can_filter = {
-        .acceptance_code = (uint32_t)(0x7E8UL << 21),
-        .acceptance_mask = ~(uint32_t)(0x7F8UL << 21),
-        .single_filter = true
-    };
+    // We use ACCEPT_ALL to allow both 11-bit and 29-bit auto-discovery.
+    // Filtering is handled in Obd2Decoder::processRxFrame().
+    twai_filter_config_t can_filter = TWAI_FILTER_CONFIG_ACCEPT_ALL();
 #endif
 
     LOG_INFO("Starting System Initialization...");

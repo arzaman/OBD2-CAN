@@ -15,11 +15,23 @@
 // Modes
 #define OBD_MODE_CURRENT_DATA 0x01
 
-// Known standard request ID
-#define CAN_ID_OBD_REQUEST  0x7DF
-#define CAN_ID_OBD_REPLY_MIN 0x7E8
-#define CAN_ID_OBD_REPLY_MAX 0x7EF
+// Known standard request ID (11-bit)
+#define CAN_ID_OBD_REQUEST_STD   0x7DF
+#define CAN_ID_OBD_REPLY_STD_MIN 0x7E8
+#define CAN_ID_OBD_REPLY_STD_MAX 0x7EF
 
+// Known extended request ID (29-bit)
+#define CAN_ID_OBD_REQUEST_EXT   0x18DB33F1
+// 29-bit responses usually match 0x18DAF100 to 0x18DAF1FF
+#define CAN_ID_OBD_REPLY_EXT_MASK 0xFFFFFF00
+#define CAN_ID_OBD_REPLY_EXT_VAL  0x18DAF100
+
+// Protocol type for Auto-Discovery
+enum class ObdProtocol {
+    UNKNOWN,
+    STD_11_BIT,
+    EXT_29_BIT
+};
 
 // Structure to hold decodable OBD2 values globally
 struct ObdData {
@@ -60,9 +72,11 @@ private:
     ObdState _state;
     uint32_t _lastRxTime; // Track last valid response tick
     bool _hasReceived;    // Flag to ensure we don't show true at boot
+    ObdProtocol _protocol;
+    uint32_t _timeoutCount; // To track auto-discovery attempts
     
     // Internal helper to build request payload
-    twai_message_t buildRequest(uint8_t mode, uint8_t pid);
+    twai_message_t buildRequest(uint8_t mode, uint8_t pid, ObdProtocol proto);
     
     // Internal helper to decode specific PID payload
     void decodePayload(uint8_t pid, const uint8_t* data, uint8_t len);

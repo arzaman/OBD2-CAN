@@ -1,13 +1,20 @@
 #include "Obd2Decoder.h"
 
-Obd2Decoder::Obd2Decoder() : _state(ObdState::IDLE), _lastRxTime(0), _hasReceived(false) {
+Obd2Decoder::Obd2Decoder() : _state(ObdState::IDLE), _lastRxTime(0), _hasReceived(false), _protocol(ObdProtocol::UNKNOWN), _timeoutCount(0) {
     // Initializer list covers defaults
 }
 
-twai_message_t Obd2Decoder::buildRequest(uint8_t mode, uint8_t pid) {
+twai_message_t Obd2Decoder::buildRequest(uint8_t mode, uint8_t pid, ObdProtocol proto) {
     twai_message_t req = {0};
-    req.identifier = CAN_ID_OBD_REQUEST;
-    req.extd = 0;              // Standard 11-bit ID
+    
+    if (proto == ObdProtocol::EXT_29_BIT) {
+        req.identifier = CAN_ID_OBD_REQUEST_EXT;
+        req.extd = 1;              // Extended 29-bit ID
+    } else {
+        req.identifier = CAN_ID_OBD_REQUEST_STD;
+        req.extd = 0;              // Standard 11-bit ID
+    }
+    
     req.rtr = 0;               // Data frame
     req.data_length_code = 8;  // DLC is always 8 for classic CAN OBD requests
 
@@ -23,28 +30,41 @@ twai_message_t Obd2Decoder::buildRequest(uint8_t mode, uint8_t pid) {
 }
 
 twai_message_t Obd2Decoder::generateTxRequest() {
-    // Basic State Machine to alternate requests
+    // 1. Auto-Discovery Logic
+    ObdProtocol targetProto = _protocol;
+    
+    if (targetProto == ObdProtocol::UNKNOWN) {
+        // We try each protocol for 5 attempts before switching
+        if ((_timeoutCount / 5) % 2 == 0) {
+            targetProto = ObdProtocol::STD_11_BIT;
+        } else {
+            targetProto = ObdProtocol::EXT_29_BIT;
+        }
+        _timeoutCount++;
+    }
+
+    // 2. Basic State Machine to alternate requests
     switch (_state) {
         case ObdState::IDLE:
         case ObdState::WAITING_RPM:
             _state = ObdState::WAITING_SPEED; // Next expected wait
-            return buildRequest(OBD_MODE_CURRENT_DATA, PID_ENGINE_RPM);
+            return buildRequest(OBD_MODE_CURRENT_DATA, PID_ENGINE_RPM, targetProto);
         
         case ObdState::WAITING_SPEED:
             _state = ObdState::WAITING_TEMP; // Next expected wait
-            return buildRequest(OBD_MODE_CURRENT_DATA, PID_VEHICLE_SPEED);
+            return buildRequest(OBD_MODE_CURRENT_DATA, PID_VEHICLE_SPEED, targetProto);
 
         case ObdState::WAITING_TEMP:
             _state = ObdState::WAITING_LOAD; 
-            return buildRequest(OBD_MODE_CURRENT_DATA, PID_COOLANT_TEMP);
+            return buildRequest(OBD_MODE_CURRENT_DATA, PID_COOLANT_TEMP, targetProto);
 
         case ObdState::WAITING_LOAD:
             _state = ObdState::WAITING_RPM; 
-            return buildRequest(OBD_MODE_CURRENT_DATA, PID_ENGINE_LOAD);
+            return buildRequest(OBD_MODE_CURRENT_DATA, PID_ENGINE_LOAD, targetProto);
 
         default:
             _state = ObdState::WAITING_RPM;
-            return buildRequest(OBD_MODE_CURRENT_DATA, PID_ENGINE_RPM);
+            return buildRequest(OBD_MODE_CURRENT_DATA, PID_ENGINE_RPM, targetProto);
     }
 }
 
@@ -56,8 +76,16 @@ bool Obd2Decoder::isConnected() const {
 }
 
 void Obd2Decoder::processRxFrame(const twai_message_t& msg) {
-    // Filter OBD-II Response frames range (0x7E8 to 0x7EF)
-    if (msg.identifier >= CAN_ID_OBD_REPLY_MIN && msg.identifier <= CAN_ID_OBD_REPLY_MAX) {
+    bool isStdReply = (msg.extd == 0) && (msg.identifier >= CAN_ID_OBD_REPLY_STD_MIN && msg.identifier <= CAN_ID_OBD_REPLY_STD_MAX);
+    bool isExtReply = (msg.extd == 1) && ((msg.identifier & CAN_ID_OBD_REPLY_EXT_MASK) == CAN_ID_OBD_REPLY_EXT_VAL);
+
+    // Filter OBD-II Response frames range
+    if (isStdReply || isExtReply) {
+        if (_protocol == ObdProtocol::UNKNOWN) {
+            _protocol = isStdReply ? ObdProtocol::STD_11_BIT : ObdProtocol::EXT_29_BIT;
+            LOG_INFO(">>> PROTOCOL DISCOVERED: %s <<<", isStdReply ? "STD_11_BIT" : "EXT_29_BIT");
+        }
+
         if (msg.data_length_code >= 3) {
             uint8_t count = msg.data[0];    // How many valid bytes in payload
             if (count > 7) count = 7;       // Safeguard, max OBD response fits in single frame if small amount
@@ -66,6 +94,8 @@ void Obd2Decoder::processRxFrame(const twai_message_t& msg) {
             if (mode == (OBD_MODE_CURRENT_DATA + 0x40)) {
                 _hasReceived = true;
                 _lastRxTime = millis();     // We got a VALID OBD2 reply!
+                _timeoutCount = 0;          // Reset timeout counter upon valid reception
+                
                 uint8_t pid = msg.data[2];
                 // Extract useful payload based on length byte (discounting mode and pid bytes)
                 decodePayload(pid, &msg.data[3], count - 2); 
