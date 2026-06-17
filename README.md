@@ -26,9 +26,15 @@ Il firmware "Simulator" agisce come una **Centralina Motore Reale (ECU)**:
   - Ascolto passivo del bus CAN e decodifica dei messaggi di diagnostica.
   - **Gestione 11-bit e 29-bit**: Modalità di emulazione selezionabile dinamicamente tramite **doppio-click** rapido sul pulsante.
   - **Feedback Visivo LED**: Il LED RGB integrato (WS2812C) indica la modalità in uso (🔵 Blu = 11-bit, 🟢 Verde = 29-bit).
-  - Simulatore fisico con modello vettoriale dinamico al variare del tempo (Motore, Trasmissione, Acqua).
-  - Funzione "Acceleratore": L'integrazione del pulsante centrale dell'AtomS3 Lite funge da gas permettendo di simulare ramp-up a 6500 RPM, accelerazioni fino a 180 km/h e salita del carico motore e temperature in tempo reale.
-  - Risposta sincrona al Master simulando un ID veicolare standard (`0x7E8`).
+  - **Motore Fisico Ibrido**: Risposta dinamica per i Giri Motore (RPM) basata sull'input dell'utente, mentre gli altri parametri diagnostici sono stati bloccati per offrire un ambiente di test stabile e prevedibile.
+  - **Funzione "Acceleratore"**: Il pulsante centrale dell'AtomS3 Lite controlla esclusivamente i giri motore, permettendo di simulare ramp-up da 800 a 6500 RPM (PID 0x0C).
+  - **Valori Sensori Statici Supportati**:
+    - Velocità: `0 km/h` (PID 0x0D)
+    - Carico Motore: `20%` (PID 0x04)
+    - Temp. Acqua: `80 °C` (PID 0x05)
+    - Livello Carburante: `80%` (PID 0x2F)
+    - Posizione Farfalla: `20%` (PID 0x11)
+  - Risposta sincrona al Master simulando un ID veicolare standard o esteso.
 
 ## Sicurezza USB Nativa (CDC)
 I firmware includono un sistema di sicurezza per l'USB Nativa (HWCDC). Il logging rileva se il Monitor Seriale su PC è attivo: in caso di disconnessione, i log vengono soppressi per evitare il blocco dei buffer USB e i conseguenti crash causati dal Watchdog Timer, garantendo un'operatività continua in modalità "standalone".

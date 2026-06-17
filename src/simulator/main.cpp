@@ -28,9 +28,11 @@ void EcuSimulatorTask(void* pvParameters) {
     LOG_INFO("ECU Simulator Listening Task started. Mode: %s", emulate_29_bit ? "29-bit" : "11-bit");
 
     static float sim_rpm = 800.0f;
-    static float sim_speed = 0.0f;
-    static float sim_temp = 90.0f;
-    static float sim_load = 20.0f;
+    const float sim_speed = 0.0f;
+    const float sim_temp = 80.0f;
+    const float sim_load = 20.0f;
+    const float sim_fuel = 80.0f;
+    const float sim_throttle = 20.0f;
     uint32_t last_physics_update = millis();
 
     static uint32_t last_click_time = 0;
@@ -63,27 +65,9 @@ void EcuSimulatorTask(void* pvParameters) {
         if (M5.BtnA.isPressed()) {
             sim_rpm += 2000.0f * dt;      // Accel 2000 RPM/s
             if (sim_rpm > 6500.0f) sim_rpm = 6500.0f;
-            
-            sim_speed += 40.0f * dt;      // Accel 40 km/h per sec
-            if (sim_speed > 180.0f) sim_speed = 180.0f;
-            
-            sim_load += 200.0f * dt;      // Load shoots up quickly
-            if (sim_load > 85.0f) sim_load = 85.0f;
-            
-            sim_temp += 1.0f * dt;        // Warms up slowly under load
-            if (sim_temp > 105.0f) sim_temp = 105.0f;
         } else {
             sim_rpm -= 3000.0f * dt;      // Drops fast when releasing throttle
             if (sim_rpm < 800.0f) sim_rpm = 800.0f;
-            
-            sim_speed -= 20.0f * dt;      // Coasting / Engine Braking drops speed
-            if (sim_speed < 0.0f) sim_speed = 0.0f;
-            
-            sim_load -= 250.0f * dt;      // Load drops immediately to base
-            if (sim_load < 20.0f) sim_load = 20.0f;
-            
-            sim_temp -= 0.5f * dt;        // Slowly cools down 
-            if (sim_temp < 90.0f) sim_temp = 90.0f;
         }
 
         // --- Hardware Auto-Recovery ---
@@ -155,6 +139,22 @@ void EcuSimulatorTask(void* pvParameters) {
                             // Formula: A * 100 / 255 = Load -> A = Load * 255 / 100
                             tx_msg.data[0] = 3;
                             tx_msg.data[3] = ((int)(sim_load) * 255 / 100) & 0xFF; // A
+                            validRequest = true;
+                            break;
+
+                        case 0x2F: // PID_FUEL_LEVEL
+                            // Return static Fuel Level
+                            // Formula: A * 100 / 255 = Fuel -> A = Fuel * 255 / 100
+                            tx_msg.data[0] = 3;
+                            tx_msg.data[3] = ((int)(sim_fuel) * 255 / 100) & 0xFF; // A
+                            validRequest = true;
+                            break;
+
+                        case 0x11: // PID_THROTTLE
+                            // Return static Throttle Position
+                            // Formula: A * 100 / 255 = Throttle -> A = Throttle * 255 / 100
+                            tx_msg.data[0] = 3;
+                            tx_msg.data[3] = ((int)(sim_throttle) * 255 / 100) & 0xFF; // A
                             validRequest = true;
                             break;
 
