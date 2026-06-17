@@ -4,19 +4,28 @@
 #include "../Config.h"
 #include "../../lib/HalCan/HalCan.h"
 #include "../../lib/Obd2/Obd2Decoder.h" // Just to reuse PID constants
+#include <Adafruit_NeoPixel.h>
 
-// -----------------------------------------------------------------------------
-// ECU SIMULATOR CONFIGURATION
-// -----------------------------------------------------------------------------
-// Set to 1 to emulate the Mercedes Sprinter (29-bit ID). 
-// Set to 0 to emulate a standard car (11-bit ID).
-#define EMULATE_29_BIT 1
+#define LED_PIN 35
+#define NUM_LEDS 1
+Adafruit_NeoPixel pixels(NUM_LEDS, LED_PIN, NEO_GRB + NEO_KHZ800);
+
+bool emulate_29_bit = false; // Default 11-bit
+
+void updateLed() {
+    if (emulate_29_bit) {
+        pixels.setPixelColor(0, pixels.Color(0, 255, 0)); // Green
+    } else {
+        pixels.setPixelColor(0, pixels.Color(0, 0, 255)); // Blue
+    }
+    pixels.show();
+}
 
 // -----------------------------------------------------------------------------
 // ECU SIMULATOR TASK
 // -----------------------------------------------------------------------------
 void EcuSimulatorTask(void* pvParameters) {
-    LOG_INFO("ECU Simulator Listening Task started.");
+    LOG_INFO("ECU Simulator Listening Task started. Mode: %s", emulate_29_bit ? "29-bit" : "11-bit");
 
     static float sim_rpm = 800.0f;
     static float sim_speed = 0.0f;
@@ -24,9 +33,8 @@ void EcuSimulatorTask(void* pvParameters) {
     static float sim_load = 20.0f;
     uint32_t last_physics_update = millis();
 
-    uint32_t expected_req_id = EMULATE_29_BIT ? CAN_ID_OBD_REQUEST_EXT : CAN_ID_OBD_REQUEST_STD;
-    uint32_t reply_id = EMULATE_29_BIT ? (CAN_ID_OBD_REPLY_EXT_VAL | 0x10) : CAN_ID_OBD_REPLY_STD_MIN;
-    uint8_t reply_extd = EMULATE_29_BIT ? 1 : 0;
+    static uint32_t last_click_time = 0;
+    static bool waiting_second_click = false;
 
     while (1) {
         // --- 1. Physics Engine ---
@@ -34,6 +42,22 @@ void EcuSimulatorTask(void* pvParameters) {
         uint32_t now_ms = millis();
         float dt = (now_ms - last_physics_update) / 1000.0f;
         last_physics_update = now_ms;
+
+        // Double Click detection to switch mode
+        if (M5.BtnA.wasPressed()) {
+            if (waiting_second_click && (now_ms - last_click_time < 400)) {
+                emulate_29_bit = !emulate_29_bit;
+                updateLed();
+                LOG_INFO("Mode switched manually to: %s", emulate_29_bit ? "29-bit" : "11-bit");
+                waiting_second_click = false;
+            } else {
+                waiting_second_click = true;
+                last_click_time = now_ms;
+            }
+        }
+        if (waiting_second_click && (now_ms - last_click_time > 400)) {
+            waiting_second_click = false;
+        }
 
         // Button A = Accelerator. Releasing it = Engine Brake
         if (M5.BtnA.isPressed()) {
@@ -75,6 +99,10 @@ void EcuSimulatorTask(void* pvParameters) {
         if (HalCan::getInstance().readFrame(rx_msg, 50)) {
             LOG_INFO(">>> DEBUG: RAW FRAME RECEIVED. ID: 0x%03X, DLC: %d, EXTD: %d", rx_msg.identifier, rx_msg.data_length_code, rx_msg.extd);
             
+            uint32_t expected_req_id = emulate_29_bit ? CAN_ID_OBD_REQUEST_EXT : CAN_ID_OBD_REQUEST_STD;
+            uint32_t reply_id = emulate_29_bit ? (CAN_ID_OBD_REPLY_EXT_VAL | 0x10) : CAN_ID_OBD_REPLY_STD_MIN;
+            uint8_t reply_extd = emulate_29_bit ? 1 : 0;
+
             // Check if it's the expected OBD2 Broadcast Request
             if (rx_msg.identifier == expected_req_id && rx_msg.extd == reply_extd && rx_msg.data_length_code >= 3) {
                 
@@ -171,6 +199,11 @@ void setup() {
 
     LOG_INFO("--- OBD2 ECU SIMULATOR ---");
     LOG_INFO("Hardware: AtomS3 Lite + CAN Unit (CA-IS3050G)");
+
+    // Initialize RGB LED
+    pixels.begin();
+    pixels.setBrightness(50);
+    updateLed(); // Set initial color
 
     // Initialize CAN HAL with SIMULATOR specific pins (G1, G2)
     // AtomS3 Lite Grove: TX = Yellow (G1), RX = White (G2)

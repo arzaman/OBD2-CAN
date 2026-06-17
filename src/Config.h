@@ -9,9 +9,9 @@
 #define DEBUG_MODE 1
 
 #if DEBUG_MODE
-    #define LOG_INFO(fmt, ...)  Serial.printf("[INFO][%lu] " fmt "\n", millis(), ##__VA_ARGS__)
-    #define LOG_WARN(fmt, ...)  Serial.printf("[WARN][%lu] " fmt "\n", millis(), ##__VA_ARGS__)
-    #define LOG_ERR(fmt, ...)   Serial.printf("[ERR][%lu] " fmt "\n", millis(), ##__VA_ARGS__)
+    #define LOG_INFO(fmt, ...)  do { if (Serial) { Serial.printf("[INFO][%lu] " fmt "\n", millis(), ##__VA_ARGS__); } } while(0)
+    #define LOG_WARN(fmt, ...)  do { if (Serial) { Serial.printf("[WARN][%lu] " fmt "\n", millis(), ##__VA_ARGS__); } } while(0)
+    #define LOG_ERR(fmt, ...)   do { if (Serial) { Serial.printf("[ERR][%lu] " fmt "\n", millis(), ##__VA_ARGS__); } } while(0)
 #else
     #define LOG_INFO(fmt, ...)
     #define LOG_WARN(fmt, ...)

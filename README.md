@@ -13,7 +13,8 @@ Questa infrastruttura garantisce il corretto isolamento del firmware, pur manten
 Il firmware "Scanner" agisce da **Master / Client diagnostico**:
 - **Hardware**: M5Stack AtomS3 + Atomic CAN Base (CA-IS3050G).
 - **Funzionalità**:
-  - Pinging continuo in broadcast (`0x7DF`) per ottenere valori chiave correnti.
+  - **Auto-Discovery del protocollo**: Rilevamento automatico e connessione a veicoli con ID Standard (11-bit) o Extended (29-bit).
+  - Pinging continuo in broadcast (`0x7DF` o `0x18DB33F1`) per ottenere valori chiave correnti.
   - Interfaccia grafica multi-schermata via TFT (RPM Analogici, Tachimetro, Griglia Dati).
   - Meccanismo di ripristino automatico hardware dai guasti del bus differenziale (`BUS_OFF recovery`).
   - Indicatore visivo di stato della connessione (Pallino Verde in caso di ACK, Rosso in caso di mancato collegamento o mancati pacchetti in ricezione per un periodo superiore a N secondi).
@@ -23,9 +24,14 @@ Il firmware "Simulator" agisce come una **Centralina Motore Reale (ECU)**:
 - **Hardware**: M5Stack AtomS3 Lite + Unit CAN (Grove CA-IS3050G).
 - **Funzionalità**:
   - Ascolto passivo del bus CAN e decodifica dei messaggi di diagnostica.
+  - **Gestione 11-bit e 29-bit**: Modalità di emulazione selezionabile dinamicamente tramite **doppio-click** rapido sul pulsante.
+  - **Feedback Visivo LED**: Il LED RGB integrato (WS2812C) indica la modalità in uso (🔵 Blu = 11-bit, 🟢 Verde = 29-bit).
   - Simulatore fisico con modello vettoriale dinamico al variare del tempo (Motore, Trasmissione, Acqua).
   - Funzione "Acceleratore": L'integrazione del pulsante centrale dell'AtomS3 Lite funge da gas permettendo di simulare ramp-up a 6500 RPM, accelerazioni fino a 180 km/h e salita del carico motore e temperature in tempo reale.
   - Risposta sincrona al Master simulando un ID veicolare standard (`0x7E8`).
+
+## Sicurezza USB Nativa (CDC)
+I firmware includono un sistema di sicurezza per l'USB Nativa (HWCDC). Il logging rileva se il Monitor Seriale su PC è attivo: in caso di disconnessione, i log vengono soppressi per evitare il blocco dei buffer USB e i conseguenti crash causati dal Watchdog Timer, garantendo un'operatività continua in modalità "standalone".
 
 ## Cablaggio Fisico
 - **Dispositivi**: 2 x Controller (uno scanner e un simulatore) sui rispettivi moduli transceiver isolati.
